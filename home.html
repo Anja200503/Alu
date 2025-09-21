@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALU VERRE - Gestion Menuiserie Aluminium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--accent-color);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-right: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-color1 {
+            color: var(--light-color);
+        }
+        
+        .logo-color2 {
+            color: var(--accent-color);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            padding: 40px 0;
+        }
+        
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .dashboard-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+            position: relative;
+        }
+        
+        .menu-card:nth-child(2) {
+            border-top-color: var(--success-color);
+        }
+        
+        .menu-card:nth-child(3) {
+            border-top-color: var(--warning-color);
+        }
+        
+        .menu-card:nth-child(4) {
+            border-top-color: var(--danger-color);
+        }
+        
+        .menu-card:nth-child(5) {
+            border-top-color: #9b59b6;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .menu-icon {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-size: 32px;
+            padding: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-card:nth-child(2) .menu-icon {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .menu-card:nth-child(3) .menu-icon {
+            background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+        }
+        
+        .menu-card:nth-child(4) .menu-icon {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .menu-card:nth-child(5) .menu-icon {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+        }
+        
+        .menu-content {
+            padding: 25px;
+        }
+        
+        .menu-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+        
+        .menu-content p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .menu-card:nth-child(2) .btn {
+            background-color: var(--success-color);
+        }
+        
+        .menu-card:nth-child(3) .btn {
+            background-color: var(--warning-color);
+        }
+        
+        .menu-card:nth-child(4) .btn {
+            background-color: var(--danger-color);
+        }
+        
+        .menu-card:nth-child(5) .btn {
+            background-color: #9b59b6;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+                padding: 0 15px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo"><span class="logo-color1">ALU</span> <span class="logo-color2">VERRE</span></div>
+                <i class="fas fa-industry" style="font-size: 32px; color: #fff;"></i>
+            </div>
+            <div class="subtitle">Spécialiste en menuiserie aluminium - Systèmes de haute qualité pour fenêtres, portes et vérandas</div>
+        </div>
+    </header>
+    
+    <div class="container main-content">
+        <h1 class="dashboard-title">Tableau de Bord de Gestion</h1>
+        
+        <div class="menu-grid">
+            <!-- Commande Vaovao -->
+            <div class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <span class="notification-badge">3</span>
+                <div class="menu-content">
+                    <h3>Commande Vaovao</h3>
+                    <p>Créer et gérer de nouvelles commandes pour vos clients. Suivi des devis en attente.</p>
+                    <a href="commande_vaovao.html" class="btn">Accéder</a>
+                </div>
+            </div>
+            
+            <!-- Commande Rahetra -->
+            <div class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <span class="notification-badge">12</span>
+                <div class="menu-content">
+                    <h3>Commande Rahetra</h3>
+                    <p>Consulter et suivre l'état des commandes en cours de production et livraison.</p>
+                    <a href="commande_rahetra.html" class="btn">Accéder</a>
+                </div>
+            </div>
+            
+            <!-- Presence -->
+            <div class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="menu-content">
+                    <h3>Présence</h3>
+                    <p>Gérer les présences, absences et congés du personnel. Feuille de temps.</p>
+                    <a href="presence.html" class="btn">Accéder</a>
+                </div>
+            </div>
+            
+            <!-- Vitre Plateau -->
+            <div class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <span class="notification-badge">7</span>
+                <div class="menu-content">
+                    <h3>Vitre Plateau</h3>
+                    <p>Suivi des stocks et gestion des matériaux (aluminium, verre, accessoires).</p>
+                    <a href="vitre_plateau.html" class="btn">Accéder</a>
+                </div>
+            </div>
+            
+            <!-- Création de Facture -->
+            <div class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <span class="notification-badge">5</span>
+                <div class="menu-content">
+                    <h3>Créer Facture</h3>
+                    <p>Générer, imprimer et envoyer des factures pour vos clients. Gestion des règlements.</p>
+                    <a href="creer_facture.html" class="btn">Accéder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo"><span class="logo-color1">ALU</span> <span class="logo-color2">VERRE</span></div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Rue de l'Industrie, Zone Artisanale</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+261 XX XX XXX XX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@aluverre.mg</span>
+                    </div>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 ALU VERRE - Tous droits réservés | Spécialiste en menuiserie aluminium
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
